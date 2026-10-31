@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RESPAW XITER</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #08090d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
+    padding: 15px;
+}
+
+.panel {
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 4 / 3;
+    background: #101116;
+    border: 1px solid #29252e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 35px #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: #151319;
+    border-bottom: 1px solid #302a35;
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #ff303b;
+}
+
+.version {
+    font-size: 10px;
+    color: #77717c;
+    letter-spacing: 1px;
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.status {
+    background: #19171d;
+    border: 1px solid #302c35;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status-label {
+    font-size: 11px;
+    color: #88838e;
+    letter-spacing: 1px;
+}
+
+.status-value {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff4652;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.action-btn {
+    height: 43px;
+    border: 1px solid #ff303b;
+    background: #ff303b;
+    color: white;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.action-btn.secondary {
+    background: #21171b;
+    color: #ff4652;
+}
+
+.action-btn:hover {
+    filter: brightness(1.2);
+}
+
+.section-title {
+    font-size: 10px;
+    color: #77717c;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.functions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.function {
+    background: #19171d;
+    border: 1px solid #2b2730;
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.function-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #d9d6df;
+}
+
+.toggle {
+    width: 35px;
+    height: 19px;
+    background: #35313b;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.toggle::after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    background: #aaa4b1;
+    position: absolute;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: 0.2s;
+}
+
+.toggle.active {
+    background: #a51f2a;
+}
+
+.toggle.active::after {
+    left: 19px;
+    background: #ff4652;
+}
+
+.slider-box {
+    background: #19171d;
+    border: 1px solid #2b2730;
+    padding: 14px;
+    border-radius: 5px;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.slider-header span:first-child {
+    color: #d9d6df;
+    font-weight: 600;
+}
+
+.slider-value {
+    color: #ff4652;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 4px;
+    appearance: none;
+    background: #37313c;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    background: #ff303b;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff303b66;
+}
+
+.footer {
+    border-top: 1px solid #29252e;
+    background: #131116;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #68636e;
+    letter-spacing: 1px;
+}
+
+.footer span:last-child {
+    color: #ff4652;
+}
+
+@media (max-width: 500px) {
+    .panel {
+        aspect-ratio: auto;
+        min-height: 530px;
+    }
+
+    .content {
+        padding: 14px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .function-name {
+        font-size: 11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+    <div class="header">
+        <div class="logo">RESPAW <span>XITER</span></div>
+        <div class="version">PROTOTYPE V1.0</div>
+    </div>
+
+    <div class="content">
+
+        <div class="status">
+            <span class="status-label">STATUS DO PAINEL</span>
+            <span class="status-value" id="status">AGUARDANDO</span>
+        </div>
+
+        <div class="actions">
+            <button class="action-btn" onclick="startGame()">
+                INICIAR FREE FIRE
+            </button>
+
+            <button class="action-btn secondary" onclick="injectDemo()">
+                INJETAR NO FREE FIRE
+            </button>
+        </div>
+
+        <div>
+            <div class="section-title">CONFIGURAÇÕES</div>
+
+            <div class="functions">
+
+                <div class="function">
+                    <span class="function-name">HS Cabeça</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">HS Pescoço</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">HS Peito</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">Aimkill</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">ESP Linha</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">ESP Box</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+                <div class="function">
+                    <span class="function-name">ESP Esqueleto</span>
+                    <button class="toggle" onclick="toggleFunction(this)"></button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="slider-box">
+            <div class="slider-header">
+                <span>FOV GERAL</span>
+                <span class="slider-value" id="fovValue">90</span>
+            </div>
+
+            <input
+                type="range"
+                id="fov"
+                min="0"
+                max="360"
+                value="90"
+                oninput="changeFov(this.value)"
+            >
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <span>RESPAW XITER • UI PROTOTYPE</span>
+        <span>STATUS: OFFLINE</span>
+    </div>
+
+</div>
+
+<script>
+
+function resetStatus() {
+    document.getElementById("status").textContent = "AGUARDANDO";
+}
+
+function toggleFunction(button) {
+    button.classList.toggle("active");
+    resetStatus();
+}
+
+function changeFov(value) {
+    document.getElementById("fovValue").textContent = value;
+    resetStatus();
+}
+
+function startGame() {
+    document.getElementById("status").textContent = "SOLICITAÇÃO";
+}
+
+function injectDemo() {
+    document.getElementById("status").textContent = "DEMONSTRAÇÃO";
+}
+
+</script>
+
+</body>
+</html>
